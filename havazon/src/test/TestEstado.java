@@ -9,6 +9,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import enums.EstadoEnum;
+import enums.RegiaoEnum;
+
 @RunWith(Parameterized.class)
 public class TestEstado {
     String estado;
@@ -22,16 +25,16 @@ public class TestEstado {
     }
 
     @Parameters
-    public static Iterable<Object[]> getParameters(){
-        return Arrays.asList(new Object[][] { 
-            {"Acre", EstadoEnum.AC, RegiaoEnum.NORTE},
-            {"Distrito Federal", EstadoEnum.DF, RegiaoEnum.CENTRO_OESTE},
-            {"Tocantins", EstadoEnum.TO, RegiaoEnum.NORTE},
+    public static Iterable<Object[]> getParameters() {
+        return Arrays.asList(new Object[][] {
+                { "Acre", EstadoEnum.AC, RegiaoEnum.NORTE },
+                { "Distrito Federal", EstadoEnum.DF, RegiaoEnum.CENTRO_OESTE },
+                { "Tocantins", EstadoEnum.TO, RegiaoEnum.NORTE },
         });
     }
 
     @Test
     public void test() {
-        assertEquals(estado , estadoEnum.getNome());
+        assertEquals(estado, estadoEnum.getNome());
     }
 }

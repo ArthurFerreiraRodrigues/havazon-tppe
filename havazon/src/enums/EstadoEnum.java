@@ -1,4 +1,4 @@
-package test;
+package enums;
 
 public enum EstadoEnum {
     AC("Acre", RegiaoEnum.NORTE),
@@ -39,7 +39,7 @@ public enum EstadoEnum {
 
     public String getNome() {
         return nome;
-    }
+    }  
 
     public  RegiaoEnum getRegiao(){
         return regiao;
