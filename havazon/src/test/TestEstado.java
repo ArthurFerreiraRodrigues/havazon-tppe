@@ -13,18 +13,20 @@ import org.junit.runners.Parameterized.Parameters;
 public class TestEstado {
     String estado;
     EstadoEnum estadoEnum;
+    RegiaoEnum regiaoEnum;
 
-    public TestEstado(String estado, EstadoEnum estadoEnum) {
+    public TestEstado(String estado, EstadoEnum estadoEnum, RegiaoEnum regiaoEnum) {
         this.estado = estado;
         this.estadoEnum = estadoEnum;
+        this.regiaoEnum = regiaoEnum;
     }
 
     @Parameters
     public static Iterable<Object[]> getParameters(){
         return Arrays.asList(new Object[][] { 
-            {"Acre", EstadoEnum.AC},
-            {"Distrito Federal", EstadoEnum.DF},
-            {"Tocantins", EstadoEnum.TO},
+            {"Acre", EstadoEnum.AC, RegiaoEnum.NORTE},
+            {"Distrito Federal", EstadoEnum.DF, RegiaoEnum.CENTRO_OESTE},
+            {"Tocantins", EstadoEnum.TO, RegiaoEnum.NORTE},
         });
     }
 

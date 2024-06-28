@@ -41,8 +41,8 @@ public enum EstadoEnum {
         return nome;
     }
 
-    public String getStrRegiao(){
-        return regiao.name();
+    public  RegiaoEnum getRegiao(){
+        return regiao;
     }
 
     @Override
