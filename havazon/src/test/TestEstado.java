@@ -36,5 +36,6 @@ public class TestEstado {
     @Test
     public void test() {
         assertEquals(estado, estadoEnum.getNome());
+        assertEquals(estadoEnum.getRegiao(), regiaoEnum );
     }
 }
