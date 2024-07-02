@@ -5,7 +5,8 @@ public enum RegiaoEnum {
     NORDESTE("Nordeste"),
     CENTRO_OESTE("Centro-Oeste"),
     SUDESTE("Sudeste"),
-    SUL("Sul");
+    SUL("Sul"),
+    DF("Distrito-Federal");
 
     private final String nome;
 
