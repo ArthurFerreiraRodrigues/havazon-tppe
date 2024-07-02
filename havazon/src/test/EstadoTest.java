@@ -13,12 +13,12 @@ import enums.EstadoEnum;
 import enums.RegiaoEnum;
 
 @RunWith(Parameterized.class)
-public class TestEstado {
+public class EstadoTest {
     String estado;
     EstadoEnum estadoEnum;
     RegiaoEnum regiaoEnum;
 
-    public TestEstado(String estado, EstadoEnum estadoEnum, RegiaoEnum regiaoEnum) {
+    public EstadoTest(String estado, EstadoEnum estadoEnum, RegiaoEnum regiaoEnum) {
         this.estado = estado;
         this.estadoEnum = estadoEnum;
         this.regiaoEnum = regiaoEnum;
@@ -36,6 +36,6 @@ public class TestEstado {
     @Test
     public void test() {
         assertEquals(estado, estadoEnum.getNome());
-        assertEquals(estadoEnum.getRegiao(), regiaoEnum );
+        assertEquals(estadoEnum.getRegiao(), regiaoEnum);
     }
 }
