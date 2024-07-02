@@ -11,31 +11,33 @@ import org.junit.runners.Parameterized.Parameters;
 
 import enums.EstadoEnum;
 import enums.RegiaoEnum;
+import models.EnderecoModel;
 
 @RunWith(Parameterized.class)
-public class TestEstado {
-    String estado;
-    EstadoEnum estadoEnum;
-    RegiaoEnum regiaoEnum;
+public class EnderecoTest {
 
-    public TestEstado(String estado, EstadoEnum estadoEnum, RegiaoEnum regiaoEnum) {
-        this.estado = estado;
-        this.estadoEnum = estadoEnum;
+    String regiao;
+    RegiaoEnum regiaoEnum;
+    EstadoEnum estadoEnum;
+
+    public EnderecoTest(String regiao, RegiaoEnum regiaoEnum, EstadoEnum estadoEnum) {
+        this.regiao = regiao;
         this.regiaoEnum = regiaoEnum;
+        this.estadoEnum = estadoEnum;
     }
 
     @Parameters
     public static Iterable<Object[]> getParameters() {
         return Arrays.asList(new Object[][] {
-                { "Acre", EstadoEnum.AC, RegiaoEnum.NORTE },
-                { "Distrito Federal", EstadoEnum.DF, RegiaoEnum.CENTRO_OESTE },
-                { "Tocantins", EstadoEnum.TO, RegiaoEnum.NORTE },
+                { "Centro-Oeste", RegiaoEnum.CENTRO_OESTE, EstadoEnum.GO },
+                { "Nordeste", RegiaoEnum.NORDESTE, EstadoEnum.PB }
         });
     }
 
     @Test
     public void test() {
-        assertEquals(estado, estadoEnum.getNome());
-        assertEquals(estadoEnum.getRegiao(), regiaoEnum );
+        EnderecoModel endereco = new EnderecoModel(false, estadoEnum);
+        assertEquals(endereco.getRegiao(), regiaoEnum);
     }
+
 }

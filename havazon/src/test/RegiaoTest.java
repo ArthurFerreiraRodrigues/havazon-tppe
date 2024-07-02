@@ -12,11 +12,11 @@ import org.junit.runners.Parameterized.Parameters;
 import enums.RegiaoEnum;
 
 @RunWith(Parameterized.class)
-public class TestRegiao {
+public class RegiaoTest {
     String regiao;
     RegiaoEnum regiaoEnum;
 
-    public TestRegiao(String regiao, RegiaoEnum regiaoEnum) {
+    public RegiaoTest(String regiao, RegiaoEnum regiaoEnum) {
         this.regiao = regiao;
         this.regiaoEnum = regiaoEnum;
     }
