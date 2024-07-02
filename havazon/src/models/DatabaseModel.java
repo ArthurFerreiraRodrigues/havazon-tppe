@@ -1,7 +1,7 @@
 package models;
 
-public class Database {
-    private Database() {
+public class DatabaseModel {
+    private DatabaseModel() {
     }
 
     /*
