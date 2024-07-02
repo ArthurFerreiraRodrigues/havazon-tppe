@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import models.CartaoModel;
 
-public class CartaoTest {
+public class CartaoModelTest {
 
     @Test
     public void test() {
