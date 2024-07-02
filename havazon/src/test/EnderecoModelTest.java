@@ -14,13 +14,13 @@ import enums.RegiaoEnum;
 import models.EnderecoModel;
 
 @RunWith(Parameterized.class)
-public class EnderecoTest {
+public class EnderecoModelTest {
 
     String regiao;
     RegiaoEnum regiaoEnum;
     EstadoEnum estadoEnum;
 
-    public EnderecoTest(String regiao, RegiaoEnum regiaoEnum, EstadoEnum estadoEnum) {
+    public EnderecoModelTest(String regiao, RegiaoEnum regiaoEnum, EstadoEnum estadoEnum) {
         this.regiao = regiao;
         this.regiaoEnum = regiaoEnum;
         this.estadoEnum = estadoEnum;

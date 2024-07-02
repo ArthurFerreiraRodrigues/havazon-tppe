@@ -13,12 +13,12 @@ import enums.EstadoEnum;
 import enums.RegiaoEnum;
 
 @RunWith(Parameterized.class)
-public class EstadoTest {
+public class EstadoEnumTest {
     String estado;
     EstadoEnum estadoEnum;
     RegiaoEnum regiaoEnum;
 
-    public EstadoTest(String estado, EstadoEnum estadoEnum, RegiaoEnum regiaoEnum) {
+    public EstadoEnumTest(String estado, EstadoEnum estadoEnum, RegiaoEnum regiaoEnum) {
         this.estado = estado;
         this.estadoEnum = estadoEnum;
         this.regiaoEnum = regiaoEnum;
