@@ -9,20 +9,20 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import enums.Imposto;
 import enums.RegiaoEnum;
+import models.ImpostoModel;
 
 
 @RunWith(Parameterized.class)
-public class TestImposto {
-    Imposto imposto;
+public class ImpostoModelTest {
+    ImpostoModel imposto;
     double valorDoPedido;
     double expectedIcmsResult;
     RegiaoEnum regiaoEnum;
     boolean isCapital;
     double expectedImpostoMunicipalResult;
 
-    public TestImposto(double valorDoPedido, double expectedIcmsResult, double expectedImpostoMunicipalResult, RegiaoEnum regiaoEnum, boolean isCapital) {
+    public ImpostoModelTest(double valorDoPedido, double expectedIcmsResult, double expectedImpostoMunicipalResult, RegiaoEnum regiaoEnum, boolean isCapital) {
         this.valorDoPedido = valorDoPedido;
         this.expectedIcmsResult = expectedIcmsResult;
         this.regiaoEnum = regiaoEnum;
@@ -43,7 +43,7 @@ public class TestImposto {
 
     @Test
     public void test() {
-        assertEquals(Imposto.icms(valorDoPedido),expectedIcmsResult, 0.001);
-        assertEquals(Imposto.municipal(regiaoEnum, isCapital), expectedImpostoMunicipalResult, 0.001);
+        assertEquals(ImpostoModel.icms(valorDoPedido),expectedIcmsResult, 0.001);
+        assertEquals(ImpostoModel.municipal(regiaoEnum, isCapital), expectedImpostoMunicipalResult, 0.001);
     }
 }
