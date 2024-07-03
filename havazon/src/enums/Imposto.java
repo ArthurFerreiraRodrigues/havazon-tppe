@@ -8,22 +8,22 @@ public class Imposto {
     }
     static public double municipal(RegiaoEnum regiaoEnum, boolean isCapital){
         switch (regiaoEnum) {
-            case RegiaoEnum.DF:
+            case DF:
                 if(isCapital) return 5.0;
                     return 0.0;
-            case RegiaoEnum.CENTRO_OESTE:
+            case CENTRO_OESTE:
                 if(isCapital) return 10.0;
                     return 13.0;
-            case RegiaoEnum.NORDESTE:
+            case NORDESTE:
                 if(isCapital) return 15.0;
                     return 18.0;
-            case RegiaoEnum.NORTE:
+            case NORTE:
                 if(isCapital) return 20.0;
                     return 25.0;
-            case RegiaoEnum.SUDESTE:
+            case SUDESTE:
                 if(isCapital) return 7.0;
                     return 10.0;
-            case RegiaoEnum.SUL:
+            case SUL:
                 if(isCapital) return 10.0;
                     return 13.0;
             default:
