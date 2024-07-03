@@ -47,7 +47,7 @@ public class VendaModelTest {
 
         List<String> produtos1 = Arrays.asList("Produto 1", "Produto 2");
 
-        VendaModel vendaModel1 = new VendaModel(cliente1, dateTime1, produtos1, 10.0, 0.0, 5.0, 111.5, 18.0);
+        VendaModel vendaModel1 = new VendaModel(cliente1, dateTime1, produtos1, 111.5);
 
         String expectedOutput1 = "========================================\n" +
                 "NOTA FISCAL\n" +
@@ -60,11 +60,12 @@ public class VendaModelTest {
                 "- Produto 1\n" +
                 "- Produto 2\n" +
                 "----------------------------------------\n" +
-                "Desconto: 10,00\n" +
-                "Saldo de Cashback: 0,00\n" +
-                "Frete: 5,00\n" +
-                "Impostos: 18,00\n" +
-                "Valor Total: 111,50\n" +
+                "Desconto: 10.00%\n" +
+                "Saldo de Cashback: 0.00\n" +
+                "Frete: 10.50\n" +
+                "Municipal: 4.43\n"+
+                "ICMS: 13.30\n"+
+                "Valor Total: 118.09\n" +
                 "========================================\n";
 
         

@@ -4,30 +4,75 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import enums.RegiaoEnum;
+import enums.TipoClienteEnum;
+
 public class VendaModel {
     private ClienteModel cliente;
     private LocalDateTime dateTime;
-    //TODO: change this to Product class
+    // TODO: change this to Product class
     private List<String> produtos;
     private double desconto;
     private double saldoCashback;
     private double frete;
     private double valorTotal;
-    private double impostos;
+    private ImpostoModel imposto;
 
-    public VendaModel(ClienteModel cliente, LocalDateTime dateTime, List<String> produtos, double desconto, double saldoCashback, double frete, double valorTotal, double impostos) {
+    public VendaModel(ClienteModel cliente, LocalDateTime dateTime, List<String> produtos, double valorTotal) {
         this.cliente = cliente;
         this.dateTime = dateTime;
         this.produtos = produtos;
-        this.desconto = desconto;
-        this.saldoCashback = saldoCashback;
-        this.frete = frete;
-        this.valorTotal = valorTotal;
-        this.impostos = impostos;
+        this.desconto = calculaDesconto(cliente);
+        this.saldoCashback = cliente.getSaldoCashback();
+        this.frete = cliente.getTipoCliente() == TipoClienteEnum.ESPECIAL ? calculaFrete(cliente.getEndereco().getRegiao(), cliente.getEndereco().isCapital()) * 0.7 : calculaFrete(cliente.getEndereco().getRegiao(), cliente.getEndereco().isCapital());
+        this.valorTotal = valorTotal * (1.0 - this.desconto);
+        this.imposto = new ImpostoModel(this.valorTotal + this.frete, this.cliente.getEndereco());
     }
 
+    public double calculaDesconto(ClienteModel cliente) {
+        double totalDesconto = 0.0;
+        if (cliente.getTipoCliente() == TipoClienteEnum.ESPECIAL
+                || cliente.getTipoCliente() == TipoClienteEnum.PRIME_ESPECIAL) {
+            totalDesconto += 10.0;
+        }
+        if (cliente.getCartao().isEmpresarial()) {
+            totalDesconto += 10.0;
+        }
 
-    
+        return totalDesconto / 100.0;
+    }
+
+    public double calculaFrete(RegiaoEnum regiaoEnum, boolean isCapital) {
+        switch (regiaoEnum) {
+            case DF:
+                if (isCapital)
+                    return 5.0;
+                return 0.0;
+            case CENTRO_OESTE:
+                if (isCapital)
+                    return 10.0;
+                return 13.0;
+            case NORDESTE:
+                if (isCapital)
+                    return 15.0;
+                return 18.0;
+            case NORTE:
+                if (isCapital)
+                    return 20.0;
+                return 25.0;
+            case SUDESTE:
+                if (isCapital)
+                    return 7.0;
+                return 10.0;
+            case SUL:
+                if (isCapital)
+                    return 10.0;
+                return 13.0;
+            default:
+                return 0.0;
+        }
+    }
+
     public String emitirNotaFiscal() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         StringBuilder sb = new StringBuilder();
@@ -44,11 +89,12 @@ public class VendaModel {
             sb.append("- ").append(produto).append("\n");
         }
         sb.append("----------------------------------------\n");
-        sb.append(String.format("Desconto: %.2f\n", desconto));
-        sb.append(String.format("Saldo de Cashback: %.2f\n", saldoCashback));
-        sb.append(String.format("Frete: %.2f\n", frete));
-        sb.append(String.format("Impostos: %.2f\n", impostos));
-        sb.append(String.format("Valor Total: %.2f\n", valorTotal));
+        sb.append(String.format("Desconto: %.2f%%\n", this.desconto*100));
+        sb.append(String.format("Saldo de Cashback: %.2f\n", this.saldoCashback));
+        sb.append(String.format("Frete: %.2f\n", this.frete));
+        sb.append(String.format("Municipal: %.2f\n", this.imposto.getMunicipal()));
+        sb.append(String.format("ICMS: %.2f\n", this.imposto.getIcms()));
+        sb.append(String.format("Valor Total: %.2f\n", this.valorTotal + this.imposto.getIcms() + this.imposto.getMunicipal()));
         sb.append("========================================\n");
 
         return sb.toString();
