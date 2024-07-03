@@ -7,7 +7,7 @@ public enum EstadoEnum {
     AM("Amazonas", RegiaoEnum.NORTE),
     BA("Bahia", RegiaoEnum.NORDESTE),
     CE("Ceará", RegiaoEnum.NORDESTE),
-    DF("Distrito Federal", RegiaoEnum.CENTRO_OESTE),
+    DF("Distrito Federal", RegiaoEnum.DF),
     ES("Espírito Santo", RegiaoEnum.SUDESTE),
     GO("Goiás", RegiaoEnum.CENTRO_OESTE),
     MA("Maranhão", RegiaoEnum.NORDESTE),
