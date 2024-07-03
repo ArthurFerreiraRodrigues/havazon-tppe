@@ -9,7 +9,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import enums.EstadoEnum;
 import enums.RegiaoEnum;
+import models.EnderecoModel;
 import models.ImpostoModel;
 
 
@@ -18,14 +20,14 @@ public class ImpostoModelTest {
     ImpostoModel imposto;
     double valorDoPedido;
     double expectedIcmsResult;
-    RegiaoEnum regiaoEnum;
+    EstadoEnum estadoEnum;
     boolean isCapital;
     double expectedImpostoMunicipalResult;
 
-    public ImpostoModelTest(double valorDoPedido, double expectedIcmsResult, double expectedImpostoMunicipalResult, RegiaoEnum regiaoEnum, boolean isCapital) {
+    public ImpostoModelTest(double valorDoPedido, double expectedIcmsResult, double expectedImpostoMunicipalResult, EstadoEnum estadoEnum, boolean isCapital) {
         this.valorDoPedido = valorDoPedido;
         this.expectedIcmsResult = expectedIcmsResult;
-        this.regiaoEnum = regiaoEnum;
+        this.estadoEnum = estadoEnum;
         this.isCapital = isCapital;
         this.expectedImpostoMunicipalResult = expectedImpostoMunicipalResult;
         
@@ -34,16 +36,17 @@ public class ImpostoModelTest {
     @Parameters
     public static Iterable<Object[]> getParameters() {
         return Arrays.asList(new Object[][] {
-                { 20.0 , 2.4, 5.0, RegiaoEnum.DF, true},
-                { 20.0 , 2.4, 0.0, RegiaoEnum.DF, false},
-                { 100.0 , 12.0, 10.0 ,RegiaoEnum.CENTRO_OESTE , true},
-                { 100.0 , 12.0, 13.0 ,RegiaoEnum.CENTRO_OESTE , false},
+                { 100.0 , 18.0, 0.0, EstadoEnum.DF, true},
+                { 100.0 , 18.0, 0.0, EstadoEnum.DF, false},
+                { 100.0 , 12.0, 4.0 ,EstadoEnum.GO , true},
+                { 100.0 , 12.0, 4.0 ,EstadoEnum.GO , false},
         });
     }
 
     @Test
     public void test() {
-        assertEquals(ImpostoModel.icms(valorDoPedido),expectedIcmsResult, 0.001);
-        assertEquals(ImpostoModel.municipal(regiaoEnum, isCapital), expectedImpostoMunicipalResult, 0.001);
+        ImpostoModel imposto = new ImpostoModel(valorDoPedido, new EnderecoModel(isCapital, estadoEnum));
+        assertEquals(imposto.getIcms(),expectedIcmsResult, 0.001);
+        assertEquals(imposto.getMunicipal(), expectedImpostoMunicipalResult, 0.001);
     }
 }
