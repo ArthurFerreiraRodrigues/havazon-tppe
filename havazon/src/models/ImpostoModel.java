@@ -1,6 +1,8 @@
-package enums;
+package models;
 
-public class Imposto {
+import enums.RegiaoEnum;
+
+public class ImpostoModel {
     static public double icms(double valorDoPedido){
         return valorDoPedido * 0.12;
     }
