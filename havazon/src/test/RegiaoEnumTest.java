@@ -26,6 +26,7 @@ public class RegiaoEnumTest {
         return Arrays.asList(new Object[][] {
                 { "Centro-Oeste", RegiaoEnum.CENTRO_OESTE },
                 { "Nordeste", RegiaoEnum.NORDESTE },
+                { "Distrito-Federal", RegiaoEnum.DF},
         });
     }
 
