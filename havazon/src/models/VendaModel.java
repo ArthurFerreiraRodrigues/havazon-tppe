@@ -7,15 +7,14 @@ import java.util.List;
 public class VendaModel {
     private ClienteModel cliente;
     private LocalDateTime dateTime;
-    //TODO: change this to Product class
-    private List<String> produtos;
+    private List<ProdutoModel> produtos;
     private double desconto;
     private double saldoCashback;
     private double frete;
     private double valorTotal;
     private double impostos;
 
-    public VendaModel(ClienteModel cliente, LocalDateTime dateTime, List<String> produtos, double desconto, double saldoCashback, double frete, double valorTotal, double impostos) {
+    public VendaModel(ClienteModel cliente, LocalDateTime dateTime, List<ProdutoModel> produtos, double desconto, double saldoCashback, double frete, double valorTotal, double impostos) {
         this.cliente = cliente;
         this.dateTime = dateTime;
         this.produtos = produtos;
@@ -40,8 +39,8 @@ public class VendaModel {
         sb.append("Data: ").append(dateTime.format(formatter)).append("\n");
         sb.append("----------------------------------------\n");
         sb.append("PRODUTOS\n");
-        for (String produto : produtos) {
-            sb.append("- ").append(produto).append("\n");
+        for (ProdutoModel produto : produtos) {
+            sb.append("- ").append(produto.getDescricao()).append("\n");
         }
         sb.append("----------------------------------------\n");
         sb.append(String.format("Desconto: %.2f\n", desconto));
