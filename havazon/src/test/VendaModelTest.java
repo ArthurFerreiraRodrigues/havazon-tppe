@@ -15,6 +15,7 @@ import enums.EstadoEnum;
 import models.CartaoModel;
 import models.ClienteModel;
 import models.EnderecoModel;
+import models.ProdutoModel;
 import models.VendaModel;
 
 /*
@@ -45,7 +46,10 @@ public class VendaModelTest {
 
         LocalDateTime dateTime1 = LocalDateTime.of(2024, 7, 2, 10, 0);
 
-        List<String> produtos1 = Arrays.asList("Produto 1", "Produto 2");
+        List<ProdutoModel> produtos1 = Arrays.asList(
+            new ProdutoModel(1, "Produto 1", 50.0, "peça"),
+            new ProdutoModel(2, "Produto 2", 60.0, "peça")
+        );
 
         VendaModel vendaModel1 = new VendaModel(cliente1, dateTime1, produtos1, 10.0, 0.0, 5.0, 111.5, 18.0);
 
@@ -60,11 +64,11 @@ public class VendaModelTest {
                 "- Produto 1\n" +
                 "- Produto 2\n" +
                 "----------------------------------------\n" +
-                "Desconto: 10,00\n" +
-                "Saldo de Cashback: 0,00\n" +
-                "Frete: 5,00\n" +
-                "Impostos: 18,00\n" +
-                "Valor Total: 111,50\n" +
+                "Desconto: 10.00\n" +
+                "Saldo de Cashback: 0.00\n" +
+                "Frete: 5.00\n" +
+                "Impostos: 18.00\n" +
+                "Valor Total: 111.50\n" +
                 "========================================\n";
 
         
