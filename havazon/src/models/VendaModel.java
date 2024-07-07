@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import enums.TipoClienteEnum;
+
 public class VendaModel {
     private ClienteModel cliente;
     private LocalDateTime dateTime;
@@ -14,22 +16,59 @@ public class VendaModel {
     private double valorTotal;
     private double impostos;
 
-    public VendaModel(ClienteModel cliente, LocalDateTime dateTime, List<ProdutoModel> produtos, double desconto, double saldoCashback, double frete, double valorTotal, double impostos) {
+    public VendaModel(ClienteModel cliente, LocalDateTime dateTime, List<ProdutoModel> produtos) {
         this.cliente = cliente;
         this.dateTime = dateTime;
         this.produtos = produtos;
-        this.desconto = desconto;
-        this.saldoCashback = saldoCashback;
-        this.frete = frete;
-        this.valorTotal = valorTotal;
-        this.impostos = impostos;
     }
 
+    private void calculaDesconto(){
+        if(this.cliente.getTipoCliente() == TipoClienteEnum.ESPECIAL){
+            this.desconto = 10;
+            if(this.cliente.getCartao().isEmpresarial()){
+                this.desconto += 10;
+            }
+        }
+    }
 
+    private void calculaCashback(){
+        if(this.cliente.getCartao().isEmpresarial()){
+            this.saldoCashback = this.valorTotal * 0.05;
+        }
+        else{
+            this.saldoCashback = this.valorTotal * 0.03;
+        }
+    }
+
+    private double calculaValorProdutos(){
+        double valor = 0;
+        for (ProdutoModel produto : produtos) {
+            valor += produto.getPreco();
+        }
+        return valor;
+    }
+
+    private void calculaImpostos(){
+        this.impostos = ImpostoModel.icms(this.cliente.getEndereco().getEstado(), this.calculaValorProdutos());
+    }
+
+    private void calculaFrete(){
+        this.frete = ImpostoModel.municipal(this.cliente.getEndereco().getRegiao(), this.cliente.getEndereco().isCapital());
+    }
+
+    private void calculaValorTotal(){
+        this.calculaDesconto();
+        this.calculaFrete();
+        this.calculaImpostos();
+        this.valorTotal = this.calculaValorProdutos() - this.desconto + this.frete + this.impostos;
+    }
     
     public String emitirNotaFiscal() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         StringBuilder sb = new StringBuilder();
+
+        this.calculaValorTotal();
+        this.calculaCashback();
 
         sb.append("========================================\n");
         sb.append("NOTA FISCAL\n");
