@@ -51,7 +51,7 @@ public class VendaModelTest {
             new ProdutoModel(2, "Produto 2", 60.0, "peça")
         );
 
-        VendaModel vendaModel1 = new VendaModel(cliente1, dateTime1, produtos1, 10.0, 0.0, 5.0, 111.5, 18.0);
+        VendaModel vendaModel1 = new VendaModel(cliente1, dateTime1, produtos1);
 
         String expectedOutput1 = "========================================\n" +
                 "NOTA FISCAL\n" +
@@ -65,10 +65,10 @@ public class VendaModelTest {
                 "- Produto 2\n" +
                 "----------------------------------------\n" +
                 "Desconto: 10.00\n" +
-                "Saldo de Cashback: 0.00\n" +
-                "Frete: 5.00\n" +
-                "Impostos: 18.00\n" +
-                "Valor Total: 111.50\n" +
+                "Saldo de Cashback: 3.98\n" +
+                "Frete: 15.00\n" +
+                "Impostos: 17.60\n" +
+                "Valor Total: 132.60\n" +
                 "========================================\n";
 
         

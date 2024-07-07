@@ -1,10 +1,13 @@
 package models;
 
+import enums.EstadoEnum;
 import enums.RegiaoEnum;
 
 public class ImpostoModel {
-    static public double icms(double valorDoPedido){
-        return valorDoPedido * 0.12;
+    static public double icms(EstadoEnum estadoEnum, double valorDoPedido){
+        if(estadoEnum != EstadoEnum.DF)
+            return (valorDoPedido * 0.12) + (valorDoPedido * 0.04);
+        return valorDoPedido * 0.18;
     }
     static public double municipal(RegiaoEnum regiaoEnum, boolean isCapital){
         switch (regiaoEnum) {
