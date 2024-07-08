@@ -12,6 +12,8 @@ public class ProdutoModel {
         this.descricao = descricao;
         this.preco = preco;
         this.unidade = unidade;
+
+        DatabaseModel.getProdutos().add(this);
     }
 
     public int getCodigo() {
