@@ -17,6 +17,8 @@ public class ClienteModel {
         this.saldoCashback = 0;
         this.valorTotalComprasMensal = 0;
         this.cartao = cartao;
+
+        DatabaseModel.getClientes().add(this);
     }
 
     public int getId() {
