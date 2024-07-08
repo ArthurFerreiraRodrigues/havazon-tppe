@@ -16,6 +16,7 @@ public class VendaModel {
     private double frete;
     private double valorTotal;
     private ImpostoModel imposto;
+    private double descontoCashback;
 
     public VendaModel(ClienteModel cliente, LocalDateTime dateTime, List<ProdutoModel> produtos) {
         this.cliente = cliente;
@@ -32,7 +33,16 @@ public class VendaModel {
 
         this.imposto = new ImpostoModel(this.valorTotal + this.frete, this.cliente.getEndereco());
         this.valorTotal += this.frete + this.imposto.getIcms() + this.imposto.getMunicipal();
-
+        
+        if(this.valorTotal <= this.cliente.getSaldoCashback()){
+            this.descontoCashback = this.valorTotal;
+            this.valorTotal = 0.0;
+        }
+        else{
+            this.descontoCashback = this.cliente.getSaldoCashback();
+            this.valorTotal -= this.cliente.getSaldoCashback();
+        }
+        this.cliente.zeraSaldoCashback();
         this.saldoCashback = this.calculaCashback();
 
         DatabaseModel.getVendas().add(this);
@@ -84,7 +94,7 @@ public class VendaModel {
 
     private double calculaCashback() {
         if (this.cliente.getTipoCliente() != TipoClienteEnum.PRIME
-                || this.cliente.getTipoCliente() != TipoClienteEnum.PRIME_ESPECIAL) {
+                && this.cliente.getTipoCliente() != TipoClienteEnum.PRIME_ESPECIAL) {
             return 0.0;
         }
 
@@ -108,8 +118,6 @@ public class VendaModel {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         StringBuilder sb = new StringBuilder();
 
-        this.calculaCashback();
-
         sb.append("========================================\n");
         sb.append("NOTA FISCAL\n");
         sb.append("========================================\n");
@@ -123,6 +131,7 @@ public class VendaModel {
         }
         sb.append("----------------------------------------\n");
         sb.append(String.format("Desconto: %.2f%%\n", this.desconto * 100));
+        sb.append(String.format("Valor Abatido com Cashback: %.2f\n", this.descontoCashback));
         sb.append(String.format("Saldo de Cashback: %.2f\n", this.saldoCashback));
         sb.append(String.format("Frete: %.2f\n", this.frete));
         sb.append(String.format("Municipal: %.2f\n", this.imposto.getMunicipal()));

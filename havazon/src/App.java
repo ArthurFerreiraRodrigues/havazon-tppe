@@ -10,7 +10,6 @@ import models.VendaModel;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
 
         ClienteModel cliente1 = new ClienteModel(new EnderecoModel(false, EstadoEnum.GO), new CartaoModel("1234 1234 1234 1234"));
         ClienteModel cliente2 = new ClienteModel(new EnderecoModel(true, EstadoEnum.RS), new CartaoModel("4296 1334 1234 1234"));
@@ -32,11 +31,15 @@ public class App {
         VendaModel venda2 = new VendaModel(cliente2, LocalDateTime.parse("2024-04-05T17:57:42.978223"), Arrays.asList(tv, notebook));
         VendaModel venda3 = new VendaModel(cliente3, LocalDateTime.parse("2024-04-05T17:57:42.978223"), Arrays.asList(tecido));
         VendaModel venda4 = new VendaModel(cliente4, LocalDateTime.parse("2024-04-05T17:57:42.978223"), Arrays.asList(tecido, cafe, caneta, tv));
+        VendaModel venda5 = new VendaModel(cliente2, LocalDateTime.parse("2024-04-05T17:57:42.978223"), Arrays.asList(caneta));
+        VendaModel venda6 = new VendaModel(cliente4, LocalDateTime.parse("2024-04-05T17:57:42.978223"), Arrays.asList(tecido, cafe, caneta, tv));
 
 
         System.out.println(venda1.emitirNotaFiscal());
         System.out.println(venda2.emitirNotaFiscal());
         System.out.println(venda3.emitirNotaFiscal());
         System.out.println(venda4.emitirNotaFiscal());
+        System.out.println(venda5.emitirNotaFiscal());
+        System.out.println(venda6.emitirNotaFiscal());
     }
 }
