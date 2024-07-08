@@ -1,36 +1,39 @@
 package models;
 
-import enums.EstadoEnum;
 import enums.RegiaoEnum;
 
 public class ImpostoModel {
-    static public double icms(EstadoEnum estadoEnum, double valorDoPedido){
-        if(estadoEnum != EstadoEnum.DF)
-            return (valorDoPedido * 0.12) + (valorDoPedido * 0.04);
-        return valorDoPedido * 0.18;
+    private double icms;
+    private double municipal;
+
+    public ImpostoModel(double valorDoPedido, EnderecoModel enderecoModel) {
+        this.icms = valorDoPedido * icms(enderecoModel);
+        this.municipal = valorDoPedido * municipal(enderecoModel);
     }
-    static public double municipal(RegiaoEnum regiaoEnum, boolean isCapital){
-        switch (regiaoEnum) {
-            case DF:
-                if(isCapital) return 5.0;
-                    return 0.0;
-            case CENTRO_OESTE:
-                if(isCapital) return 10.0;
-                    return 13.0;
-            case NORDESTE:
-                if(isCapital) return 15.0;
-                    return 18.0;
-            case NORTE:
-                if(isCapital) return 20.0;
-                    return 25.0;
-            case SUDESTE:
-                if(isCapital) return 7.0;
-                    return 10.0;
-            case SUL:
-                if(isCapital) return 10.0;
-                    return 13.0;
-            default:
-                return 0.0;
+
+    private double icms(EnderecoModel enderecoModel) {
+        if (enderecoModel.getRegiao() == RegiaoEnum.DF) {
+            return 0.18;
         }
+
+        return 0.12;
+
     }
+
+    private double municipal(EnderecoModel enderecoModel) {
+        if (enderecoModel.getRegiao() == RegiaoEnum.DF) {
+            return 0.0;
+        }
+
+        return 0.04;
+    }
+
+    public double getIcms() {
+        return icms;
+    }
+
+    public double getMunicipal() {
+        return municipal;
+    }
+
 }
