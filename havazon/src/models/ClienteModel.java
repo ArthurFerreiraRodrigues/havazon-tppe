@@ -51,8 +51,9 @@ public class ClienteModel {
         return saldoCashback;
     }
 
-    public void addSaldoCashback(double saldoCashback) {
+    public double addSaldoCashback(double saldoCashback) {
         this.saldoCashback += saldoCashback;
+        return this.saldoCashback;
     }
 
     public void zeraSaldoCashback() {
