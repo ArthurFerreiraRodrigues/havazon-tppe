@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import enums.RegiaoEnum;
 import enums.TipoClienteEnum;
 
 public class VendaModel {
@@ -14,33 +15,87 @@ public class VendaModel {
     private double saldoCashback;
     private double frete;
     private double valorTotal;
-    private double impostos;
+    private ImpostoModel imposto;
 
     public VendaModel(ClienteModel cliente, LocalDateTime dateTime, List<ProdutoModel> produtos) {
         this.cliente = cliente;
         this.dateTime = dateTime;
         this.produtos = produtos;
+
+        this.desconto = calculaDesconto(cliente);
+
+        this.valorTotal = this.calculaValorProdutos() * (1.0 - this.desconto);
+
+        this.frete = cliente.getTipoCliente() == TipoClienteEnum.ESPECIAL
+                ? calculaFrete(cliente.getEndereco().getRegiao(), cliente.getEndereco().isCapital()) * 0.7
+                : calculaFrete(cliente.getEndereco().getRegiao(), cliente.getEndereco().isCapital());
+
+        this.imposto = new ImpostoModel(this.valorTotal + this.frete, this.cliente.getEndereco());
+        this.valorTotal += this.frete + this.imposto.getIcms() + this.imposto.getMunicipal();
+
+        this.saldoCashback = this.calculaCashback();
+
     }
 
-    private void calculaDesconto(){
-        if(this.cliente.getTipoCliente() == TipoClienteEnum.ESPECIAL){
-            this.desconto = 10;
-            if(this.cliente.getCartao().isEmpresarial()){
-                this.desconto += 10;
-            }
+    public double calculaDesconto(ClienteModel cliente) {
+        double totalDesconto = 0.0;
+        if (cliente.getTipoCliente() == TipoClienteEnum.ESPECIAL
+                || cliente.getTipoCliente() == TipoClienteEnum.PRIME_ESPECIAL) {
+            totalDesconto += 10.0;
+        }
+        if (cliente.getCartao().isEmpresarial()) {
+            totalDesconto += 10.0;
+        }
+
+        return totalDesconto / 100.0;
+    }
+
+    public double calculaFrete(RegiaoEnum regiaoEnum, boolean isCapital) {
+        switch (regiaoEnum) {
+            case DF:
+                if (isCapital)
+                    return 5.0;
+                return 0.0;
+            case CENTRO_OESTE:
+                if (isCapital)
+                    return 10.0;
+                return 13.0;
+            case NORDESTE:
+                if (isCapital)
+                    return 15.0;
+                return 18.0;
+            case NORTE:
+                if (isCapital)
+                    return 20.0;
+                return 25.0;
+            case SUDESTE:
+                if (isCapital)
+                    return 7.0;
+                return 10.0;
+            case SUL:
+                if (isCapital)
+                    return 10.0;
+                return 13.0;
+            default:
+                return 0.0;
         }
     }
 
-    private void calculaCashback(){
-        if(this.cliente.getCartao().isEmpresarial()){
-            this.saldoCashback = this.valorTotal * 0.05;
+    private double calculaCashback() {
+        if (this.cliente.getTipoCliente() != TipoClienteEnum.PRIME
+                || this.cliente.getTipoCliente() != TipoClienteEnum.PRIME_ESPECIAL) {
+            return 0.0;
         }
-        else{
-            this.saldoCashback = this.valorTotal * 0.03;
+
+        if (this.cliente.getCartao().isEmpresarial()) {
+            return this.cliente.addSaldoCashback(this.valorTotal * 0.05);
+        } else {
+
+            return this.cliente.addSaldoCashback(this.valorTotal * 0.03);
         }
     }
 
-    private double calculaValorProdutos(){
+    private double calculaValorProdutos() {
         double valor = 0;
         for (ProdutoModel produto : produtos) {
             valor += produto.getPreco();
@@ -48,26 +103,10 @@ public class VendaModel {
         return valor;
     }
 
-    private void calculaImpostos(){
-        this.impostos = ImpostoModel.icms(this.cliente.getEndereco().getEstado(), this.calculaValorProdutos());
-    }
-
-    private void calculaFrete(){
-        this.frete = ImpostoModel.municipal(this.cliente.getEndereco().getRegiao(), this.cliente.getEndereco().isCapital());
-    }
-
-    private void calculaValorTotal(){
-        this.calculaDesconto();
-        this.calculaFrete();
-        this.calculaImpostos();
-        this.valorTotal = this.calculaValorProdutos() - this.desconto + this.frete + this.impostos;
-    }
-    
     public String emitirNotaFiscal() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         StringBuilder sb = new StringBuilder();
 
-        this.calculaValorTotal();
         this.calculaCashback();
 
         sb.append("========================================\n");
@@ -82,11 +121,13 @@ public class VendaModel {
             sb.append("- ").append(produto.getDescricao()).append("\n");
         }
         sb.append("----------------------------------------\n");
-        sb.append(String.format("Desconto: %.2f\n", desconto));
-        sb.append(String.format("Saldo de Cashback: %.2f\n", saldoCashback));
-        sb.append(String.format("Frete: %.2f\n", frete));
-        sb.append(String.format("Impostos: %.2f\n", impostos));
-        sb.append(String.format("Valor Total: %.2f\n", valorTotal));
+        sb.append(String.format("Desconto: %.2f%%\n", this.desconto * 100));
+        sb.append(String.format("Saldo de Cashback: %.2f\n", this.saldoCashback));
+        sb.append(String.format("Frete: %.2f\n", this.frete));
+        sb.append(String.format("Municipal: %.2f\n", this.imposto.getMunicipal()));
+        sb.append(String.format("ICMS: %.2f\n", this.imposto.getIcms()));
+        sb.append(String.format("Valor Total: %.2f\n",
+                this.valorTotal));
         sb.append("========================================\n");
 
         return sb.toString();
