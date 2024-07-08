@@ -28,7 +28,7 @@ public class EstadoEnumTest {
     public static Iterable<Object[]> getParameters() {
         return Arrays.asList(new Object[][] {
                 { "Acre", EstadoEnum.AC, RegiaoEnum.NORTE },
-                { "Distrito Federal", EstadoEnum.DF, RegiaoEnum.CENTRO_OESTE },
+                { "Distrito Federal", EstadoEnum.DF, RegiaoEnum.DF },
                 { "Tocantins", EstadoEnum.TO, RegiaoEnum.NORTE },
         });
     }
