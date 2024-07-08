@@ -60,8 +60,8 @@ public class VendaModelTest {
                 "Data: 2024-07-06 17:57:42\n" +
                 "----------------------------------------\n" +
                 "PRODUTOS\n" +
-                "- Caneta Esferográfica\n" +
-                "- Notebook 15.6\" 8GB RAM\n" +
+                "  R$ 1.50 - Caneta Esferográfica\n" +
+                "  R$ 3500.00 - Notebook 15.6\" 8GB RAM\n" +
                 "----------------------------------------\n" +
                 "Desconto: 0.00%\n" +
                 "Saldo de Cashback: 0.00\n" +
@@ -79,8 +79,8 @@ public class VendaModelTest {
                 "Data: 2024-04-05 17:57:42\n" +
                 "----------------------------------------\n" +
                 "PRODUTOS\n" +
-                "- TV 42\" LED Full HD\n" +
-                "- Notebook 15.6\" 8GB RAM\n" +
+                "  R$ 2300.00 - TV 42\" LED Full HD\n" +
+                "  R$ 3500.00 - Notebook 15.6\" 8GB RAM\n" +
                 "----------------------------------------\n" +
                 "Desconto: 10.00%\n" +
                 "Saldo de Cashback: 0.00\n" +
@@ -98,7 +98,7 @@ public class VendaModelTest {
                 "Data: 2024-04-05 17:57:42\n" +
                 "----------------------------------------\n" +
                 "PRODUTOS\n" +
-                "- Tecido Algodão 1m\n" +
+                "  R$ 12.00 - Tecido Algodão 1m\n" +
                 "----------------------------------------\n" +
                 "Desconto: 10.00%\n" +
                 "Saldo de Cashback: 0.00\n" +
@@ -116,10 +116,10 @@ public class VendaModelTest {
                 "Data: 2024-04-05 17:57:42\n" +
                 "----------------------------------------\n" +
                 "PRODUTOS\n" +
-                "- Tecido Algodão 1m\n" +
-                "- Café em Grãos 1kg\n" +
-                "- Caneta Esferográfica\n" +
-                "- TV 42\" LED Full HD\n" +
+                "  R$ 12.00 - Tecido Algodão 1m\n" +
+                "  R$ 25.90 - Café em Grãos 1kg\n" +
+                "  R$ 1.50 - Caneta Esferográfica\n" +
+                "  R$ 2300.00 - TV 42\" LED Full HD\n" +
                 "----------------------------------------\n" +
                 "Desconto: 20.00%\n" +
                 "Saldo de Cashback: 0.00\n" +

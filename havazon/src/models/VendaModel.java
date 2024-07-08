@@ -119,7 +119,7 @@ public class VendaModel {
         sb.append("----------------------------------------\n");
         sb.append("PRODUTOS\n");
         for (ProdutoModel produto : produtos) {
-            sb.append("- ").append(produto.getDescricao()).append("\n");
+            sb.append("  R$ ").append(String.format("%.2f",produto.getPreco())).append(" - ").append(produto.getDescricao()).append("\n");
         }
         sb.append("----------------------------------------\n");
         sb.append(String.format("Desconto: %.2f%%\n", this.desconto * 100));
