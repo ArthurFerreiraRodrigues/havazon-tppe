@@ -35,6 +35,7 @@ public class VendaModel {
 
         this.saldoCashback = this.calculaCashback();
 
+        DatabaseModel.getVendas().add(this);
     }
 
     public double calculaDesconto(ClienteModel cliente) {
