@@ -43,7 +43,8 @@ public class VendaModel {
             this.valorTotal -= this.cliente.getSaldoCashback();
         }
         this.cliente.zeraSaldoCashback();
-        this.saldoCashback = this.calculaCashback();
+        this.saldoCashback = Cashback.calcula(this.cliente.getTipoCliente(), valorTotal, cliente.getCartao().isEmpresarial());
+        cliente.addSaldoCashback(saldoCashback);
 
         DatabaseModel.getVendas().add(this);
     }
@@ -89,20 +90,6 @@ public class VendaModel {
                 return 13.0;
             default:
                 return 0.0;
-        }
-    }
-
-    private double calculaCashback() {
-        if (this.cliente.getTipoCliente() != TipoClienteEnum.PRIME
-                && this.cliente.getTipoCliente() != TipoClienteEnum.PRIME_ESPECIAL) {
-            return 0.0;
-        }
-
-        if (this.cliente.getCartao().isEmpresarial()) {
-            return this.cliente.addSaldoCashback(this.valorTotal * 0.05);
-        } else {
-
-            return this.cliente.addSaldoCashback(this.valorTotal * 0.03);
         }
     }
 
