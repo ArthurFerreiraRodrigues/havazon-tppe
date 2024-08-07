@@ -37,7 +37,7 @@ public class ClienteModel {
         return tipoCliente;
     }
 
-    private void setTipoCliente(TipoClienteEnum tipoCliente) {
+    public void setTipoCliente(TipoClienteEnum tipoCliente) {
         this.tipoCliente = tipoCliente;
     }
 
