@@ -10,7 +10,7 @@ Alunos:
 190027355 - Erick Melo Vidal de Oliveira
 
 
-## Refatoracoes 
+## Refatoracoes TP1
 
 | Grupo | Operação de Refatoração             | Classe / Método         |
 |:-----:|:------------------------------------|:------------------------|
@@ -32,3 +32,6 @@ Atraves dos commit abaixo podemos ver o metodo calculaCashback() na classe Venda
 
 https://github.com/ArthurFerreiraRodrigues/havazon-tppe/commit/e06f46267d1e3661c8c90de033d07b25ae050145
 
+## TP2 
+
+O tp2 se encontra no root do repositorio pelo nome de Tp2 - Grupo 8.pdf
