@@ -46,6 +46,17 @@ public class VendaModel {
         this.valorTotal += this.frete + this.imposto.getIcms() + this.imposto.getMunicipal();
     }
 
+    private void aplicaDescontoCashback() {
+        if(this.valorTotal <= this.cliente.getSaldoCashback()){
+            this.descontoCashback = this.valorTotal;
+            this.valorTotal = 0.0;
+        } else {
+            this.descontoCashback = this.cliente.getSaldoCashback();
+            this.valorTotal -= this.cliente.getSaldoCashback();
+        }
+        this.cliente.zeraSaldoCashback();
+    }
+    
     public double calculaDesconto(ClienteModel cliente) {
         double totalDesconto = 0.0;
         if (cliente.getTipoCliente() == TipoClienteEnum.ESPECIAL
