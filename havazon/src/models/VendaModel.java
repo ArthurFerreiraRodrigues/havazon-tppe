@@ -37,6 +37,15 @@ public class VendaModel {
         DatabaseModel.getVendas().add(this);
     }
 
+    private void calculaFreteEImposto() {
+        this.frete = cliente.getTipoCliente() == TipoClienteEnum.ESPECIAL
+                ? calculaFrete(cliente.getEndereco().getRegiao(), cliente.getEndereco().isCapital()) * 0.7
+                : calculaFrete(cliente.getEndereco().getRegiao(), cliente.getEndereco().isCapital());
+    
+        this.imposto = new ImpostoModel(this.valorTotal + this.frete, this.cliente.getEndereco());
+        this.valorTotal += this.frete + this.imposto.getIcms() + this.imposto.getMunicipal();
+    }
+
     public double calculaDesconto(ClienteModel cliente) {
         double totalDesconto = 0.0;
         if (cliente.getTipoCliente() == TipoClienteEnum.ESPECIAL
