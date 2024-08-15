@@ -22,33 +22,41 @@ public class VendaModel {
         this.cliente = cliente;
         this.dateTime = dateTime;
         this.produtos = produtos;
-
+    
         this.desconto = calculaDesconto(cliente);
-
+    
         this.valorTotal = this.calculaValorProdutos() * (1.0 - this.desconto);
+    
+        this.calculaFreteEImposto();
+    
+        this.aplicaDescontoCashback();
+    
+        this.saldoCashback = Cashback.calcula(this.cliente.getTipoCliente(), valorTotal, cliente.getCartao().isEmpresarial());
+        cliente.addSaldoCashback(saldoCashback);
+    
+        DatabaseModel.getVendas().add(this);
+    }
 
+    private void calculaFreteEImposto() {
         this.frete = cliente.getTipoCliente() == TipoClienteEnum.ESPECIAL
                 ? calculaFrete(cliente.getEndereco().getRegiao(), cliente.getEndereco().isCapital()) * 0.7
                 : calculaFrete(cliente.getEndereco().getRegiao(), cliente.getEndereco().isCapital());
-
+    
         this.imposto = new ImpostoModel(this.valorTotal + this.frete, this.cliente.getEndereco());
         this.valorTotal += this.frete + this.imposto.getIcms() + this.imposto.getMunicipal();
-        
+    }
+
+    private void aplicaDescontoCashback() {
         if(this.valorTotal <= this.cliente.getSaldoCashback()){
             this.descontoCashback = this.valorTotal;
             this.valorTotal = 0.0;
-        }
-        else{
+        } else {
             this.descontoCashback = this.cliente.getSaldoCashback();
             this.valorTotal -= this.cliente.getSaldoCashback();
         }
         this.cliente.zeraSaldoCashback();
-        this.saldoCashback = Cashback.calcula(this.cliente.getTipoCliente(), valorTotal, cliente.getCartao().isEmpresarial());
-        cliente.addSaldoCashback(saldoCashback);
-
-        DatabaseModel.getVendas().add(this);
     }
-
+    
     public double calculaDesconto(ClienteModel cliente) {
         double totalDesconto = 0.0;
         if (cliente.getTipoCliente() == TipoClienteEnum.ESPECIAL
