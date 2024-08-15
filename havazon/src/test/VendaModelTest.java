@@ -62,16 +62,16 @@ public class VendaModelTest {
                 "Data: 2024-07-06 17:57:42\n" +
                 "----------------------------------------\n" +
                 "PRODUTOS\n" +
-                "  R$ 1,50 - Caneta Esferográfica\n" +
-                "  R$ 3500,00 - Notebook 15.6\" 8GB RAM\n" +
+                "  R$ 1.50 - Caneta Esferográfica\n" +
+                "  R$ 3500.00 - Notebook 15.6\" 8GB RAM\n" +
                 "----------------------------------------\n" +
-                "Desconto: 0,00%\n" +
-                "Valor Abatido com Cashback: 0,00\n" +
-                "Saldo de Cashback: 0,00\n" +
-                "Frete: 13,00\n" +
-                "Municipal: 140,58\n" +
-                "ICMS: 421,74\n" +
-                "Valor Total: 4076,82\n" +
+                "Desconto: 0.00%\n" +
+                "Valor Abatido com Cashback: 0.00\n" +
+                "Saldo de Cashback: 0.00\n" +
+                "Frete: 13.00\n" +
+                "Municipal: 140.58\n" +
+                "ICMS: 421.74\n" +
+                "Valor Total: 4076.82\n" +
                 "========================================\n";
 
             String expectedOutput2 = "========================================\n" +
@@ -82,16 +82,16 @@ public class VendaModelTest {
                 "Data: 2024-04-05 17:57:42\n" +
                 "----------------------------------------\n" +
                 "PRODUTOS\n" +
-                "  R$ 2300,00 - TV 42\" LED Full HD\n" +
-                "  R$ 3500,00 - Notebook 15.6\" 8GB RAM\n" +
+                "  R$ 2300.00 - TV 42\" LED Full HD\n" +
+                "  R$ 3500.00 - Notebook 15.6\" 8GB RAM\n" +
                 "----------------------------------------\n" +
-                "Desconto: 10,00%\n" +
-                "Valor Abatido com Cashback: 0,00\n" +
-                "Saldo de Cashback: 303,34\n" +
-                "Frete: 10,00\n" +
-                "Municipal: 209,20\n" +
-                "ICMS: 627,60\n" +
-                "Valor Total: 6066,80\n" +
+                "Desconto: 10.00%\n" +
+                "Valor Abatido com Cashback: 0.00\n" +
+                "Saldo de Cashback: 303.34\n" +
+                "Frete: 10.00\n" +
+                "Municipal: 209.20\n" +
+                "ICMS: 627.60\n" +
+                "Valor Total: 6066.80\n" +
                 "========================================\n";
 
             String expectedOutput3 = "========================================\n" +
@@ -102,15 +102,15 @@ public class VendaModelTest {
                 "Data: 2024-04-05 17:57:42\n" +
                 "----------------------------------------\n" +
                 "PRODUTOS\n" +
-                "  R$ 12,00 - Tecido Algodão 1m\n" +
+                "  R$ 12.00 - Tecido Algodão 1m\n" +
                 "----------------------------------------\n" +
-                "Desconto: 10,00%\n" +
-                "Valor Abatido com Cashback: 0,00\n" +
-                "Saldo de Cashback: 0,00\n" +
-                "Frete: 3,50\n" +
-                "Municipal: 0,00\n" +
-                "ICMS: 2,57\n" +
-                "Valor Total: 16,87\n" +
+                "Desconto: 10.00%\n" +
+                "Valor Abatido com Cashback: 0.00\n" +
+                "Saldo de Cashback: 0.00\n" +
+                "Frete: 3.50\n" +
+                "Municipal: 0.00\n" +
+                "ICMS: 2.57\n" +
+                "Valor Total: 16.87\n" +
                 "========================================\n";
 
             String expectedOutput4 = "========================================\n" +
@@ -121,18 +121,18 @@ public class VendaModelTest {
                 "Data: 2024-04-05 17:57:42\n" +
                 "----------------------------------------\n" +
                 "PRODUTOS\n" +
-                "  R$ 12,00 - Tecido Algodão 1m\n" +
-                "  R$ 25,90 - Café em Grãos 1kg\n" +
-                "  R$ 1,50 - Caneta Esferográfica\n" +
-                "  R$ 2300,00 - TV 42\" LED Full HD\n" +
+                "  R$ 12.00 - Tecido Algodão 1m\n" +
+                "  R$ 25.90 - Café em Grãos 1kg\n" +
+                "  R$ 1.50 - Caneta Esferográfica\n" +
+                "  R$ 2300.00 - TV 42\" LED Full HD\n" +
                 "----------------------------------------\n" +
-                "Desconto: 20,00%\n" +
-                "Valor Abatido com Cashback: 0,00\n" +
-                "Saldo de Cashback: 109,59\n" +
-                "Frete: 18,00\n" +
-                "Municipal: 75,58\n" +
-                "ICMS: 226,74\n" +
-                "Valor Total: 2191,84\n" +
+                "Desconto: 20.00%\n" +
+                "Valor Abatido com Cashback: 0.00\n" +
+                "Saldo de Cashback: 109.59\n" +
+                "Frete: 18.00\n" +
+                "Municipal: 75.58\n" +
+                "ICMS: 226.74\n" +
+                "Valor Total: 2191.84\n" +
                 "========================================\n";
 
             String expectedOutput5 = "========================================\n" +
@@ -143,15 +143,15 @@ public class VendaModelTest {
                 "Data: 2024-04-05 17:57:42\n" +
                 "----------------------------------------\n" +
                 "PRODUTOS\n" +
-                "  R$ 1,50 - Caneta Esferográfica\n" +
+                "  R$ 1.50 - Caneta Esferográfica\n" +
                 "----------------------------------------\n" +
-                "Desconto: 10,00%\n" +
-                "Valor Abatido com Cashback: 13,17\n" +
-                "Saldo de Cashback: 0,00\n" +
-                "Frete: 10,00\n" +
-                "Municipal: 0,45\n" +
-                "ICMS: 1,36\n" +
-                "Valor Total: 0,00\n" +
+                "Desconto: 10.00%\n" +
+                "Valor Abatido com Cashback: 13.17\n" +
+                "Saldo de Cashback: 0.00\n" +
+                "Frete: 10.00\n" +
+                "Municipal: 0.45\n" +
+                "ICMS: 1.36\n" +
+                "Valor Total: 0.00\n" +
                 "========================================\n";
 
             String expectedOutput6 = "========================================\n" +
@@ -162,18 +162,18 @@ public class VendaModelTest {
                 "Data: 2024-04-05 17:57:42\n" +
                 "----------------------------------------\n" +
                 "PRODUTOS\n" +
-                "  R$ 12,00 - Tecido Algodão 1m\n" +
-                "  R$ 25,90 - Café em Grãos 1kg\n" +
-                "  R$ 1,50 - Caneta Esferográfica\n" +
-                "  R$ 2300,00 - TV 42\" LED Full HD\n" +
+                "  R$ 12.00 - Tecido Algodão 1m\n" +
+                "  R$ 25.90 - Café em Grãos 1kg\n" +
+                "  R$ 1.50 - Caneta Esferográfica\n" +
+                "  R$ 2300.00 - TV 42\" LED Full HD\n" +
                 "----------------------------------------\n" +
-                "Desconto: 20,00%\n" +
-                "Valor Abatido com Cashback: 109,59\n" +
-                "Saldo de Cashback: 104,11\n" +
-                "Frete: 18,00\n" +
-                "Municipal: 75,58\n" +
-                "ICMS: 226,74\n" +
-                "Valor Total: 2082,25\n" +
+                "Desconto: 20.00%\n" +
+                "Valor Abatido com Cashback: 109.59\n" +
+                "Saldo de Cashback: 104.11\n" +
+                "Frete: 18.00\n" +
+                "Municipal: 75.58\n" +
+                "ICMS: 226.74\n" +
+                "Valor Total: 2082.25\n" +
                 "========================================\n";
 
         return Arrays.asList(new Object[][] {
